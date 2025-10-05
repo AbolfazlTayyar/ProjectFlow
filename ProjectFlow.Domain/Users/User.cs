@@ -1,4 +1,5 @@
 ﻿using ProjectFlow.Domain.Abstracts;
+using ProjectFlow.Domain.Users.Events;
 
 namespace ProjectFlow.Domain.Users;
 
@@ -22,9 +23,11 @@ public sealed class User : Entity
 
     public static User Create(FirstName firstName, LastName lastName, PhoneNumber phoneNumber)
     {
-        return new User(Guid.NewGuid(), firstName, lastName, phoneNumber)
-        {
-            CreatedOnUtc = DateTime.UtcNow
-        };
+        User user = new(Guid.NewGuid(), firstName, lastName, phoneNumber);
+        user.CreatedOnUtc = DateTime.UtcNow;
+
+        user.RaiseDomainEvent(new UserCreatedDomainEvent(user.Id));
+
+        return user;
     }
 }
