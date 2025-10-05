@@ -1,4 +1,4 @@
-﻿namespace ProjectFlow.Domain.Project;
+﻿namespace ProjectFlow.Domain.Projects;
 
 public record Money(decimal Amount, Currency Currency)
 {

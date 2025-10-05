@@ -1,6 +1,6 @@
 ﻿using ProjectFlow.Domain.Abstracts;
 
-namespace ProjectFlow.Domain.Project;
+namespace ProjectFlow.Domain.Projects;
 
 public sealed class Project : Entity
 {
@@ -23,6 +23,6 @@ public sealed class Project : Entity
     public Description Description { get; private set; }
     public DateRange DateRange { get; private set; }
     public TimeEstimate TimeEstimate { get; private set; }
-    public Money Price { get; set; }
+    public Money Price { get; private set; }
     public DateTime CreatedOnUtc { get; private set; }
 }
