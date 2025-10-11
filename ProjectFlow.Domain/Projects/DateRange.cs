@@ -2,17 +2,24 @@
 
 public record DateRange
 {
-    public DateTime StartAtUtc { get; }
-    public DateTime EndAtUtc { get; }
-
-    public DateRange(DateTime startAtUtc, DateTime endAtUtc)
+    private DateRange()
     {
-        if (endAtUtc < startAtUtc)
-            throw new ArgumentException("End date must be after start date.");
-
-        StartAtUtc = startAtUtc;
-        EndAtUtc = endAtUtc;
     }
 
-    public TimeSpan Duration => EndAtUtc - StartAtUtc;
+    public DateOnly Start { get; init; }
+    public DateOnly End { get; init; }
+
+    public int LengthInDays => End.DayNumber - Start.DayNumber;
+
+    public static DateRange Create(DateOnly start, DateOnly end)
+    {
+        if (end <= start)
+            throw new ArgumentException("End date must be after start date.");
+
+        return new DateRange
+        {
+            Start = start,
+            End = end
+        };
+    }
 }
