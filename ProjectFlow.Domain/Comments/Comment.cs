@@ -1,4 +1,5 @@
 ﻿using ProjectFlow.Domain.Abstracts;
+using ProjectFlow.Domain.Comments.Events;
 
 namespace ProjectFlow.Domain.Comments;
 
