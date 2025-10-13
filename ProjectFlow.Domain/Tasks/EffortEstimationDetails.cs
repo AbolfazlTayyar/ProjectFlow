@@ -1,4 +1,4 @@
-﻿namespace ProjectFlow.Domain.TaskItems;
+﻿namespace ProjectFlow.Domain.Task;
 
 public record EffortEstimationDetails(
     int BaseHours,

@@ -5,7 +5,8 @@ namespace ProjectFlow.Domain.Users;
 
 public sealed class User : Entity
 {
-    private User(Guid id,
+    private User(
+        Guid id,
         FirstName firstName,
         LastName lastName,
         PhoneNumber phoneNumber)

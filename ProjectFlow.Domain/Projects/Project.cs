@@ -1,10 +1,12 @@
 ﻿using ProjectFlow.Domain.Abstracts;
+using ProjectFlow.Domain.Projects.Events;
 
 namespace ProjectFlow.Domain.Projects;
 
 public sealed class Project : Entity
 {
-    public Project(Guid id,
+    public Project(
+        Guid id,
         Name name,
         Description description,
         DateRange dateRange,
@@ -25,4 +27,14 @@ public sealed class Project : Entity
     public TimeEstimate TimeEstimate { get; private set; }
     public Money Price { get; private set; }
     public DateTime CreatedOnUtc { get; private set; }
+
+    public static Project Create(Name name, Description description, DateRange dateRange, TimeEstimate timeEstimate, Money price)
+    {
+        Project project = new(Guid.NewGuid(), name, description, dateRange, timeEstimate, price);
+        project.CreatedOnUtc = DateTime.UtcNow;
+
+        project.RaiseDomainEvent(new ProjectCreatedDomainEvent(project.Id));
+
+        return project;
+    }
 }
