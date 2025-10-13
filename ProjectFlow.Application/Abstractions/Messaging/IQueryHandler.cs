@@ -1,6 +1,6 @@
-﻿using ProjectFlow.Domain.Abstracts;
+﻿using ProjectFlow.Domain.Abstractions;
 
-namespace Bookify.Application.Abstractions.Messaging;
+namespace ProjectFlow.Application.Abstractions.Messaging;
 
 public interface IQueryHandler<TQuery, TResponse> : IRequestHandler<TQuery, Result<TResponse>>
     where TQuery : IQuery<TResponse>

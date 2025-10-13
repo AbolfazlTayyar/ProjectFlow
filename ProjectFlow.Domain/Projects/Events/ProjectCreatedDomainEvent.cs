@@ -1,4 +1,4 @@
-﻿using ProjectFlow.Domain.Abstracts;
+﻿using ProjectFlow.Domain.Abstractions;
 
 namespace ProjectFlow.Domain.Projects.Events;
 

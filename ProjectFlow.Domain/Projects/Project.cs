@@ -1,4 +1,4 @@
-﻿using ProjectFlow.Domain.Abstracts;
+﻿using ProjectFlow.Domain.Abstractions;
 using ProjectFlow.Domain.Projects.Events;
 
 namespace ProjectFlow.Domain.Projects;
@@ -11,7 +11,8 @@ public sealed class Project : Entity
         Description description,
         DateRange dateRange,
         TimeEstimate timeEstimate,
-        Money price)
+        Money price,
+        int maxMemberCount)
         : base(id)
     {
         Name = name;
@@ -19,6 +20,7 @@ public sealed class Project : Entity
         DateRange = dateRange;
         TimeEstimate = timeEstimate;
         Price = price;
+        MaxMemberCount = maxMemberCount;
     }
 
     public Name Name { get; private set; }
@@ -26,11 +28,12 @@ public sealed class Project : Entity
     public DateRange DateRange { get; private set; }
     public TimeEstimate TimeEstimate { get; private set; }
     public Money Price { get; private set; }
+    public int MaxMemberCount { get; private set; }
     public DateTime CreatedOnUtc { get; private set; }
 
-    public static Project Create(Name name, Description description, DateRange dateRange, TimeEstimate timeEstimate, Money price)
+    public static Project Create(Name name, Description description, DateRange dateRange, TimeEstimate timeEstimate, Money price, int maxMemberCount)
     {
-        Project project = new(Guid.NewGuid(), name, description, dateRange, timeEstimate, price);
+        Project project = new(Guid.NewGuid(), name, description, dateRange, timeEstimate, price, maxMemberCount);
         project.CreatedOnUtc = DateTime.UtcNow;
 
         project.RaiseDomainEvent(new ProjectCreatedDomainEvent(project.Id));

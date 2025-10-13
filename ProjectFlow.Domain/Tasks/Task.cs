@@ -1,4 +1,4 @@
-﻿using ProjectFlow.Domain.Abstracts;
+﻿using ProjectFlow.Domain.Abstractions;
 using ProjectFlow.Domain.Projects;
 using ProjectFlow.Domain.Task.Events;
 

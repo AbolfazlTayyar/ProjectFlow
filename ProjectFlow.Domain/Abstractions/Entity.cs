@@ -1,4 +1,4 @@
-﻿namespace ProjectFlow.Domain.Abstracts;
+﻿namespace ProjectFlow.Domain.Abstractions;
 
 public abstract class Entity
 {
