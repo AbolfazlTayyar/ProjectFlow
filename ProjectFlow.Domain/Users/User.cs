@@ -20,6 +20,7 @@ public sealed class User : Entity
     public FirstName FirstName { get; private set; }
     public LastName LastName { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
+    public Email Email { get; private set; }
     public DateTime CreatedOnUtc { get; private set; }
 
     public static User Create(FirstName firstName, LastName lastName, PhoneNumber phoneNumber)

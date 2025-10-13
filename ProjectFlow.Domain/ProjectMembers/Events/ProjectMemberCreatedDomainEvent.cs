@@ -2,4 +2,4 @@
 
 namespace ProjectFlow.Domain.ProjectMembers.Events;
 
-public record ProjectMemberCreatedDomainEvent(Guid Id) : IDomainEvent;
+public record ProjectMemberCreatedDomainEvent(Guid ProjectMemberId) : IDomainEvent;
