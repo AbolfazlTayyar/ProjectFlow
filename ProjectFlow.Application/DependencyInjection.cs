@@ -1,4 +1,5 @@
-﻿using ProjectFlow.Domain.Task;
+﻿using ProjectFlow.Application.Abstractions.Behaviors;
+using ProjectFlow.Domain.Task;
 
 namespace ProjectFlow.Application;
 
@@ -9,6 +10,8 @@ public static class DependencyInjection
         services.AddMediatR(configuration =>
         {
             configuration.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+
+            configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
 
         services.AddTransient<EstimateEffortService>();
