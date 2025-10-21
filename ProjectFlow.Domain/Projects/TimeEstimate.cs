@@ -2,15 +2,15 @@
 
 public record TimeEstimate
 {
-    public int Hours { get; }
+    public int EstimatedHours { get; }
 
     public TimeEstimate(int hours)
     {
         if (hours < 0)
             throw new ArgumentException("Estimated time cannot be negative.");
-        Hours = hours;
+        EstimatedHours = hours;
     }
 
-    public override string ToString() => $"{Hours}h";
+    public override string ToString() => $"{EstimatedHours}h";
 }
 

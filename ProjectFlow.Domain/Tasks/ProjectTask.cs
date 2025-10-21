@@ -4,9 +4,9 @@ using ProjectFlow.Domain.Task.Events;
 
 namespace ProjectFlow.Domain.Task;
 
-public sealed class Task : Entity
+public sealed class ProjectTask : Entity
 {
-    public Task(
+    public ProjectTask(
         Guid id,
         Guid projectId,
         Guid assigneeId,
@@ -40,7 +40,7 @@ public sealed class Task : Entity
     public DateTime StartedOnUtc { get; private set; }
     public DateTime? DueDateOnUtc { get; private set; }
 
-    public static Task Create(
+    public static ProjectTask Create(
         Project Project,
         Guid AssigneeId,
         Title title,
@@ -52,7 +52,7 @@ public sealed class Task : Entity
     {
         var effort = estimateEffortService.EstimateEffort(complexity, priority);
 
-        var task = new Task(
+        var task = new ProjectTask(
             Guid.NewGuid(),
             Project.Id,
             AssigneeId,

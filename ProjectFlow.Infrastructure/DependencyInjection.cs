@@ -13,6 +13,13 @@ public static class DependencyInjection
 
         services.AddTransient<IEmailService, EmailService>();
 
+        var connectionString = configuration.GetConnectionString("Database") ?? throw new ArgumentNullException(nameof(configuration));
+
+        services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
+        });
+
         return services;
     }
 }

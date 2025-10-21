@@ -6,20 +6,20 @@ public record DateRange
     {
     }
 
-    public DateOnly Start { get; init; }
-    public DateOnly End { get; init; }
+    public DateOnly StartDate { get; init; }
+    public DateOnly EndDate { get; init; }
 
-    public int LengthInDays => End.DayNumber - Start.DayNumber;
+    public int LengthInDays => EndDate.DayNumber - StartDate.DayNumber;
 
-    public static DateRange Create(DateOnly start, DateOnly end)
+    public static DateRange Create(DateOnly startDate, DateOnly endDate)
     {
-        if (end <= start)
+        if (endDate <= startDate)
             throw new ArgumentException("End date must be after start date.");
 
         return new DateRange
         {
-            Start = start,
-            End = end
+            StartDate = startDate,
+            EndDate = endDate
         };
     }
 }
