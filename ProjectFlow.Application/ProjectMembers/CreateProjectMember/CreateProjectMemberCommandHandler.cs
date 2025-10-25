@@ -1,4 +1,5 @@
 ﻿using ProjectFlow.Application.Abstractions.Messaging;
+using ProjectFlow.Application.Exceptions;
 using ProjectFlow.Domain.Abstractions;
 using ProjectFlow.Domain.Apartments;
 using ProjectFlow.Domain.ProjectMembers;
@@ -39,16 +40,24 @@ internal sealed class CreateProjectMemberCommandHandler : ICommandHandler<Create
         if (projectMembers.Count >= project.MaxMemberCount)
             return Result.Failure<Guid>(ProjectErrors.MaxMemberLimitReached);
 
-        var projectMember = ProjectMember.Create(
-                user.Id,
-                project.Id,
-                request.Role,
-                request.ExperienceLevel);
+        try
+        {
+            var projectMember = ProjectMember.Create(
+                    user.Id,
+                    project.Id,
+                    request.Role,
+                    request.ExperienceLevel,
+                    project);
 
-        _projectMemberRepository.Add(projectMember);
+            _projectMemberRepository.Add(projectMember);
 
-        await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
-        return projectMember.Id;
+            return projectMember.Id;
+        }
+        catch (ConcurrencyException ex)
+        {
+            return Result.Failure<Guid>(ProjectErrors.MaxMemberLimitReached);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ProjectFlow.Domain.Abstractions;
+﻿using ProjectFlow.Application.Exceptions;
+using ProjectFlow.Domain.Abstractions;
 
 namespace ProjectFlow.Infrastructure;
 
@@ -21,11 +22,18 @@ public sealed class ApplicationDbContext : DbContext, IUnitOfWork
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var result = await base.SaveChangesAsync(cancellationToken);
+        try
+        {
+            var result = await base.SaveChangesAsync(cancellationToken);
 
-        await PublishDomainEventsAsync();
+            await PublishDomainEventsAsync();
 
-        return result;
+            return result;
+        }
+        catch (DBConcurrencyException ex)
+        {
+            throw new ConcurrencyException("A concurrency error occurred while saving changes to the database.", ex);
+        }
     }
 
     private async Task PublishDomainEventsAsync()

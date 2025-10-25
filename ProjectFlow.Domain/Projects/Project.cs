@@ -33,6 +33,7 @@ public sealed class Project : Entity
     public Money Price { get; private set; }
     public int MaxMemberCount { get; private set; }
     public DateTime CreatedOnUtc { get; private set; }
+    public DateTime? LastMemberAddedOnUtc { get; internal set; }
 
     public static Project Create(Guid CreatedByUserId, Name name, Description description, DateRange dateRange, TimeEstimate timeEstimate, Money price, int maxMemberCount)
     {

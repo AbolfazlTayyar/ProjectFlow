@@ -1,5 +1,6 @@
 ﻿using ProjectFlow.Domain.Abstractions;
 using ProjectFlow.Domain.ProjectMembers.Events;
+using ProjectFlow.Domain.Projects;
 
 namespace ProjectFlow.Domain.ProjectMembers;
 
@@ -24,11 +25,13 @@ public sealed class ProjectMember : Entity
     public ProjectMemberRole Role { get; private set; }
     public ProjectMemberExperienceLevel ExperienceLevel { get; set; }
 
-    public static ProjectMember Create(Guid userId, Guid projectId, ProjectMemberRole role, ProjectMemberExperienceLevel experienceLevel)
+    public static ProjectMember Create(Guid userId, Guid projectId, ProjectMemberRole role, ProjectMemberExperienceLevel experienceLevel, Project project)
     {
         ProjectMember projectMember = new(Guid.NewGuid(), userId, projectId, role, experienceLevel);
 
         projectMember.RaiseDomainEvent(new ProjectMemberCreatedDomainEvent(projectMember.Id));
+
+        project.LastMemberAddedOnUtc = DateTime.UtcNow;
 
         return projectMember;
     }
