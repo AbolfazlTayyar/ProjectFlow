@@ -17,6 +17,11 @@ public sealed class User : Entity
         PhoneNumber = phoneNumber;
     }
 
+    private User()
+    {
+
+    }
+
     public FirstName FirstName { get; private set; }
     public LastName LastName { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }

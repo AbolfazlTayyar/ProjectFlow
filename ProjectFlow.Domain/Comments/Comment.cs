@@ -19,6 +19,11 @@ public sealed class Comment : Entity
         AssigneeId = assigneeId;
     }
 
+    private Comment()
+    {
+
+    }
+
     public Guid TaskId { get; private set; }
     public Guid UserId { get; private set; }
     public Note Note { get; private set; }

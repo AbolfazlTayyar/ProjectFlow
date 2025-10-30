@@ -1,3 +1,4 @@
+using ProjectFlow.Api.Extensions;
 using ProjectFlow.Application;
 using ProjectFlow.Infrastructure;
 
@@ -17,6 +18,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.ApplyMigrations();
+
+    //app.SeedData();
 }
 
 app.UseHttpsRedirection();

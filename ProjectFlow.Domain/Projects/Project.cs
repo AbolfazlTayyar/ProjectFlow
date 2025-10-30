@@ -25,6 +25,11 @@ public sealed class Project : Entity
         MaxMemberCount = maxMemberCount;
     }
 
+    private Project()
+    {
+
+    }
+
     public Guid CreatedByUserId { get; private set; }
     public Name Name { get; private set; }
     public Description Description { get; private set; }

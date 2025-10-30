@@ -28,6 +28,11 @@ public sealed class ProjectTask : Entity
         CreatedOnUtc = createdOnUtc;
     }
 
+    private ProjectTask()
+    {
+
+    }
+
     public Guid ProjectId { get; private set; }
     public Guid AssigneeId { get; private set; }
     public Title Title { get; private set; }

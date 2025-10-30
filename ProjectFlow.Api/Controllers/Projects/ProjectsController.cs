@@ -7,7 +7,7 @@ using ProjectFlow.Application.Projects.SearchProjects;
 namespace ProjectFlow.Api.Controllers.Projects;
 
 [ApiController]
-[Route("api/apartments")]
+[Route("api/projects")]
 public class ProjectsController : ControllerBase
 {
     private readonly ISender _sender;

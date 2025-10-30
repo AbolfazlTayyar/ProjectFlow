@@ -20,6 +20,11 @@ public sealed class ProjectMember : Entity
         ExperienceLevel = experienceLevel;
     }
 
+    private ProjectMember()
+    {
+
+    }
+
     public Guid UserId { get; private set; }
     public Guid ProjectId { get; private set; }
     public ProjectMemberRole Role { get; private set; }
