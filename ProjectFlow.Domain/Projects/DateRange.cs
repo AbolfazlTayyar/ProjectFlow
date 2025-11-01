@@ -2,8 +2,10 @@
 
 public record DateRange
 {
-    private DateRange()
+    private DateRange(DateOnly startDate, DateOnly endDate)
     {
+        StartDate = startDate;
+        EndDate = endDate;
     }
 
     public DateOnly StartDate { get; init; }
@@ -16,10 +18,6 @@ public record DateRange
         if (endDate <= startDate)
             throw new ArgumentException("End date must be after start date.");
 
-        return new DateRange
-        {
-            StartDate = startDate,
-            EndDate = endDate
-        };
+        return new DateRange(startDate, endDate);
     }
 }

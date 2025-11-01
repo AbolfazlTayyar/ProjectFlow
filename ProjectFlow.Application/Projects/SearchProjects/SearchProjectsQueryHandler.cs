@@ -16,7 +16,7 @@ internal sealed class SearchProjectsQueryHandler : IQueryHandler<SearchProjectsQ
 
     public async Task<Result<IReadOnlyList<ProjectResponse>>> Handle(SearchProjectsQuery request, CancellationToken cancellationToken)
     {
-        if (request.EndDate > request.StartDate)
+        if (request.StartDate > request.EndDate)
             return new List<ProjectResponse>();
 
         using var connection = _sqlConnectionFactory.CreateConnection();
@@ -26,13 +26,15 @@ internal sealed class SearchProjectsQueryHandler : IQueryHandler<SearchProjectsQ
                 p.id AS Id,
                 p.name AS Name,
                 p.description AS Description,
-                p.estimated_hours AS EstimatedHours,
-                p.currency AS Currency,
+                p.time_estimate_estimated_hours AS EstimatedHours,
+                p.price_amount AS Price,
+                p.price_currency AS Currency,
                 p.max_member_count AS MaxMemberCount,
+                p.created_on_utc AS CreatedOnUtc,
                 p.last_member_added_on_utc AS LastMemberAddedOnUtc
             FROM projects AS p
-            WHERE p.created_date BETWEEN @StartDate AND @EndDate
-            ORDER BY p.created_date DESC
+            WHERE p.created_on_utc BETWEEN @StartDate AND @EndDate
+            ORDER BY p.created_on_utc DESC
             """;
 
         var projects = await connection.QueryAsync<ProjectResponse>(

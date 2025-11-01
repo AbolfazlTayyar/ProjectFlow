@@ -12,7 +12,7 @@ using ProjectFlow.Infrastructure;
 namespace ProjectFlow.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251030073511_Create_Database")]
+    [Migration("20251101173951_Create_Database")]
     partial class Create_Database
     {
         /// <inheritdoc />

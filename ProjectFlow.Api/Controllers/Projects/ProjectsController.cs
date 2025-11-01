@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectFlow.Application.Projects.CreateProject;
 using ProjectFlow.Application.Projects.GetProject;
 using ProjectFlow.Application.Projects.SearchProjects;
+using ProjectFlow.Domain.Projects;
 
 namespace ProjectFlow.Api.Controllers.Projects;
 
@@ -40,8 +41,14 @@ public class ProjectsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateProject(CreateProjectRequest request, CancellationToken cancellationToken)
     {
-        var command = new CreateProjectCommand(request.UserId, request.Name, request.Description,
-            request.DateRange, request.TimeEstimate, request.Price, request.MaxMemberCount);
+        var command = new CreateProjectCommand(
+            request.UserId,
+            Name.Create(request.Name),
+            Description.Create(request.Description),
+            DateRange.Create(request.StartDate, request.EndDate),
+            TimeEstimate.Create(request.EstimatedHours),
+            Money.Create(request.Amount, Currency.FromCode(request.Code)),
+            request.MaxMemberCount);
 
         var result = await _sender.Send(command, cancellationToken);
 

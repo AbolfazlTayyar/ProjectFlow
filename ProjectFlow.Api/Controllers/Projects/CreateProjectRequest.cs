@@ -1,12 +1,12 @@
-﻿using ProjectFlow.Domain.Projects;
-
-namespace ProjectFlow.Api.Controllers.Projects;
+﻿namespace ProjectFlow.Api.Controllers.Projects;
 
 public record CreateProjectRequest(
     Guid UserId,
-    Name Name,
-    Description Description,
-    DateRange DateRange,
-    TimeEstimate TimeEstimate,
-    Money Price,
+    string Name,
+    string Description,
+    DateOnly StartDate,
+    DateOnly EndDate,
+    int EstimatedHours,
+    decimal Amount,
+    string Code,
     int MaxMemberCount);
